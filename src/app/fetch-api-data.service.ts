@@ -6,13 +6,13 @@ import { map } from 'rxjs/operators';
 
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'YOUR_HOSTED_API_URL_HERE/';
+const apiUrl = 'https://movies-myflix-85528af4e39c.herokuapp.com/';
 
 @Injectable({
   providedIn: 'root'
 })
+export class FetchApiDataService {
 
-export class UserRegistrationService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
   constructor(private http: HttpClient) { }
@@ -121,9 +121,8 @@ export class UserRegistrationService {
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
+        `Error body is: ${JSON.stringify(error.error)}`);
     }
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 }
