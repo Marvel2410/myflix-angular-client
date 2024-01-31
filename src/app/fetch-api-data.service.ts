@@ -35,7 +35,14 @@ export class FetchApiDataService {
 
   // Making the API call to get all movies
   public getAllMovies(): Observable<any> {
-    return this.http.get(apiUrl + 'movies').pipe(
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + 'movies', {
+      headers: new HttpHeaders(
+        {
+          Authorization: 'Bearer ' + token,
+        })
+    }).pipe(
+      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -124,5 +131,9 @@ export class FetchApiDataService {
         `Error body is: ${JSON.stringify(error.error)}`);
     }
     return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  private extractResponseData(response: any): any {
+    return response || {};
   }
 }
