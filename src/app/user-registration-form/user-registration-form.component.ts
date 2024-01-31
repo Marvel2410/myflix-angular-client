@@ -25,9 +25,9 @@ export class UserRegistrationFormComponent implements OnInit {
   registerUser(): void {
     console.log('Registration data:', this.userData);
     this.fetchApiData.userRegistration(this.userData).subscribe(
-      (response) => {
+      (result) => {
         this.dialogRef.close();
-        console.log(response);
+        console.log(result);
         this.snackBar.open('User registered successfully', 'OK', { duration: 2000 });
       },
       (error) => {
