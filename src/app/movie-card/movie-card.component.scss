@@ -1,0 +1,8 @@
+.movie-image {
+  width: 95%;
+  /* Set the width to 100% of the container */
+  height: auto;
+  /* Maintain the aspect ratio */
+  max-height: 300px;
+  /* Set a maximum height to avoid overly large images */
+}
