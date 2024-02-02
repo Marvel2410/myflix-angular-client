@@ -1,0 +1,18 @@
+<mat-card>
+  <button mat-stroked-button aria-label="Close the director details button" mat-dialog-close color="primary">
+    X
+  </button>
+  <mat-card-title>
+    <h3>{{ data.name }}</h3>
+  </mat-card-title>
+  <br />
+  <mat-dialog-content>
+    <b>Born: </b>{{ data.birth_year }}
+    <br />
+    <br />
+    <b>Died: </b>{{ data.death_year }}
+    <br />
+    <br />
+    <b>Bio: </b>{{ data.bio }}
+  </mat-dialog-content>
+</mat-card>

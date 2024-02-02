@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<mat-card>
+  <mat-card-title>Profile</mat-card-title>
+  <mat-card-content>
+    Username: {{user.username}} <br />
+    Email: {{user.email}} <br />
+    Birthdate: {{user.birthday}}<br />
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="back()" color="primary" style="margin: 20px;">
+      Back
+
+    </button>
+    <button mat-raised-button (click)="updateUser()" color="primary" style="margin: 20px;">
+      Update User
+
+    </button>
+    <button mat-raised-button (click)="deleteUser()" color="primary" style="margin: 20px;">
+      Deregister User
+
+    </button>
+  </mat-card-actions>
+</mat-card>
+<h1>Favorite Movies List</h1>
+<div>
+  <mat-card *ngFor="let movie of favorite_movies;">
+    <mat-card-header>
+      <mat-card-title>{{movie.title}}</mat-card-title>
+      <mat-card-subtitle>Directed by: {{movie.Director.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img src={{movie.imageUrl}} alt={{movie.title}} />
+  </mat-card>
+</div>
