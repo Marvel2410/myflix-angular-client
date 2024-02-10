@@ -1,0 +1,23 @@
+.mat-toolbar {
+  background-color: black;
+  /* Set the background color to black */
+  color: #f0f0f0;
+  /* Set the text color to off-white */
+}
+
+.logo {
+  color: #f0f0f0 !important;
+  /* Set the color of the logo text to off-white */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1;
+  /* Use flexbox to push the buttons to the right */
+}
+
+.example-icon {
+  color: #f0f0f0;
+  /* Set the color of the icon buttons to off-white */
+}

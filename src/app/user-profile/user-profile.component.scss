@@ -1,0 +1,116 @@
+.page-container {
+  background: linear-gradient(to bottom right, #00bfff, #00ced1, #7fffd4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.profile-container {
+  background-color: black;
+  /* Color for the profile box */
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.profile-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.profile-content {
+  color: black;
+}
+
+.profile-content-label {
+  font-weight: bold;
+}
+
+.update-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.update-profile-container {
+  max-width: 600px;
+  /* Adjust this value as needed */
+  background-color: black;
+  /* Color for the profile box */
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin: 0 auto;
+  /* Center horizontally */
+  text-align: center;
+  /* Center the text */
+}
+
+.update-profile-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.update-profile-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.update-profile-label {
+  font-weight: bold;
+  color: black;
+  /* Text color for labels */
+}
+
+.movie-header {
+  padding: 1rem;
+  text-align: center;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.movie-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+.movie-title-header {
+  font-weight: bold;
+}
+
+.movie-card {
+  max-width: 300px;
+  height: auto;
+  margin: 0.5rem;
+  border: 2px solid black;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+
+.mat-card-title,
+.movie-card-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.mat-card-image {
+  display: block;
+  margin: 0 auto;
+}

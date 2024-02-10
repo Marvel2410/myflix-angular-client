@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -5,11 +6,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { GenreComponent } from '../genre/genre.component';
 import { DirectorComponent } from '../director/director.component';
 import { MovieDetailsComponent } from '../movie-details/movie-details.component';
+import { Router } from '@angular/router';
 
 
 interface Genre {
-  name: string,
-  description: string
+  name: string;
+  description: string;
 }
 
 @Component({
@@ -19,90 +21,112 @@ interface Genre {
 })
 
 export class MovieCardComponent implements OnInit {
-  movies: any[] = [];
+  user: any = {};
   favorites: any[] = [];
+  movies: any[] = [];
 
-  user = JSON.parse(localStorage.getItem('user') || '');
+  //user = JSON.parse(localStorage.getItem('user') || '');
 
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
+    public router: Router,
     public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.getAllMovies();
-    //this.getFavorites();
+    this.getFavorites();
   }
 
   getAllMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log("this.movies:", this.movies);
-      return this.movies;
-    });
+    this.fetchApiData.getAllMovies().subscribe(
+      (resp: any) => {
+        this.movies = resp;
+        console.log('Movies from API:', this.movies);
+      },
+      (error: any) => {
+        console.error('Error fetching movies:', error);
+      }
+    );
   }
-  /*getFavorites(): void {
+
+  getFavorites(): void {
     this.fetchApiData.getOneUser().subscribe(
       (resp: any) => {
-        if (resp.user && resp.user.favorite_movies) {
-          this.favorites = resp.user.favorite_movies;
+        if (resp.user && resp.user.FavoriteMovies) {
+          this.favorites = resp.user.FavoriteMovies;
         } else {
-          this.favorites = []; // Set an empty array if data is not available
+          this.favorites = [];
         }
       },
       (error: any) => {
         console.error('Error fetching user data:', error);
-        this.favorites = []; // Set an empty array on error as well
+        this.favorites = [];
       }
     );
-  }*/
-
-  isFavoriteMovie(movieId: string): boolean {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    return user.favorite_movies.indexOf(movieId) >= 0;
   }
 
-  addToFavorites(id: string): void {
-    if (this.isFavoriteMovie(id)) {
+  isFavoriteMovie(movieTitle: string): boolean {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (user && user.FavoriteMovies) {
+      return user.FavoriteMovies.indexOf(movieTitle) >= 0;
+    }
+    return false;
+  }
+
+  addToFavorites(title: string): void {
+    if (this.isFavoriteMovie(title)) {
       // Movie is already a favorite, so remove it
-      this.removeFavoriteMovie(id);
+      this.removeFavoriteMovie(title);
     } else {
       // Movie is not a favorite, so add it
-      this.fetchApiData.addfavoriteMovies(id).subscribe(() => {
+      this.fetchApiData.addFavoriteMovies(title).subscribe(() => {
         this.snackBar.open('Movie added to favorites', 'OK', {
           duration: 2000,
         });
-        //this.getFavorites();
+        this.getFavorites();
       });
     }
   }
-  removeFavoriteMovie(id: string): void {
-    this.fetchApiData.deleteFavoriteMovie(id).subscribe(() => {
+
+  removeFavoriteMovie(title: string): void {
+    this.fetchApiData.deleteFavoriteMovie(title).subscribe(() => {
       this.snackBar.open('removed from favorites', 'OK', {
         duration: 2000
       })
     });
   }
-  openGenre(genres: Genre[]): void {
-    this.dialog.open(GenreComponent, {
-      data: {
-        name: 'Genres',
-        description: genres.map(genre => genre.name).join(', '),
+
+
+  openGenre(genre: any): void {
+    this.fetchApiData.getOneGenre(genre).subscribe(
+      (genreDetails: any) => {
+        this.dialog.open(GenreComponent, {
+          data: { genre: genreDetails },
+          width: '400px',
+        });
       },
-      width: '400px',
-    });
+      (error: any) => {
+        console.error('Error fetching director data:', error);
+      }
+    );
   }
-  openDirector(name: string, bio: string, birth_year: string, death_year: string): void {
-    this.dialog.open(DirectorComponent, {
-      data: {
-        name: name,
-        bio: bio,
-        birth_year: birth_year,
-        death_year: death_year,
+
+
+  openDirector(director: any): void {
+    this.fetchApiData.getOneDirector(director).subscribe(
+      (directorDetails: any) => {
+        this.dialog.open(DirectorComponent, {
+          data: { director: directorDetails },
+          width: '400px',
+        });
       },
-      width: '400px',
-    });
+      (error: any) => {
+        console.error('Error fetching director data:', error);
+      }
+    );
   }
+
   openSynopsis(Title: String, Description: string): void {
     this.dialog.open(MovieDetailsComponent, {
       data: {

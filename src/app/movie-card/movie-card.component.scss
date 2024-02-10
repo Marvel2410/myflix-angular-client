@@ -1,8 +1,80 @@
-.movie-image {
-  width: 95%;
-  /* Set the width to 100% of the container */
+/* movie-card.component.scss */
+
+.movie-card-container {
+  background: linear-gradient(180deg, #0072ff, #00c6ff, #00ffcc);
+}
+
+.movie-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  /* gap between cards */
+  justify-items: center;
+  /* Center the items horizontally */
+  align-items: start;
+  padding: 2rem;
+  color: black !important;
+  font-weight: bold;
+}
+
+.movietitle {
+  justify-items: center;
+  text-wrap: wrap;
+}
+
+.movie-card {
+  width: 100%;
+  max-width: 280px;
+  height: 500px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease-out;
+  border: 1px solid #ccc;
+  background-color: #fff;
+
+
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
   height: auto;
-  /* Maintain the aspect ratio */
-  max-height: 300px;
-  /* Set a maximum height to avoid overly large images */
+  max-height: 70%;
+  transition: transform 0.3s ease-out;
+}
+
+.movie-card a:hover {
+  background-color: #0056b3;
+}
+
+.movie-card .card-body {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 10px;
+}
+
+.movie-card .mat-card-title {
+  text-align: center;
+  /* Center the title */
+  white-space: none;
+  /* Prevent the title from wrapping */
+  overflow: hidden;
+  /* Hide overflow text */
+  text-overflow: ellipsis;
+  /* Show ellipsis (...) for overflow text */
+}
+
+/* Adjust the font size and line height for card subtitles */
+.mat-card-subtitle {
+  font-size: 16px;
+  line-height: 1.2;
 }

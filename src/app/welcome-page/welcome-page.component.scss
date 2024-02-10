@@ -1,0 +1,42 @@
+/* welcome-page.component.scss */
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom right, #00bfff, #00ced1, #7fffd4);
+  /* Set your desired gradient colors */
+}
+
+.welcome-container {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  /* Add opacity to the container background */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.welcome-heading {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.signup-button {
+  margin-right: 10px;
+  background-color: #007bff;
+  /* Set background color for the signup button */
+  color: #fff;
+  /* Set text color for the signup button */
+}
+
+.login-button {
+  background-color: #28a745;
+  /* Set background color for the login button */
+  color: #fff;
+  /* Set text color for the login button */
+}
