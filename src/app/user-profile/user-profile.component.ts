@@ -51,23 +51,23 @@ export class UserProfileComponent implements OnInit {
     this.favorites = this.user.FavoriteMovies || [];
   }
 
-  isFavoriteMovie(movieTitle: string): boolean {
-    return this.favorites.indexOf(movieTitle) !== -1;
+  isFavoriteMovie(movieID: string): boolean {
+    return this.favorites.indexOf(movieID) !== -1;
   }
 
-  addToFavorites(movieTitle: string): void {
-    if (this.isFavoriteMovie(movieTitle)) {
-      this.removeFavoriteMovie(movieTitle);
+  addToFavorites(movieID: string): void {
+    if (this.isFavoriteMovie(movieID)) {
+      this.removeFavoriteMovie(movieID);
     } else {
-      this.fetchApiData.addFavoriteMovies(movieTitle).subscribe(() => {
+      this.fetchApiData.addFavoriteMovies(movieID).subscribe(() => {
         this.snackBar.open('Movie added to favorites', 'OK', { duration: 2000 });
         this.loadUser(); // Reload user data and favorite movies
       });
     }
   }
 
-  removeFavoriteMovie(movieTitle: string): void {
-    this.fetchApiData.deleteFavoriteMovie(movieTitle).subscribe(() => {
+  removeFavoriteMovie(movieID: string): void {
+    this.fetchApiData.deleteFavoriteMovie(movieID).subscribe(() => {
       this.snackBar.open('Removed from favorites', 'OK', { duration: 2000 });
       this.loadUser(); // Reload user data and favorite movies
     });

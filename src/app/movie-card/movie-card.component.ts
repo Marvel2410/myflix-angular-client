@@ -66,21 +66,21 @@ export class MovieCardComponent implements OnInit {
     );
   }
 
-  isFavoriteMovie(movieTitle: string): boolean {
+  isFavoriteMovie(movieID: string): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user && user.FavoriteMovies) {
-      return user.FavoriteMovies.indexOf(movieTitle) >= 0;
+      return user.FavoriteMovies.indexOf(movieID) >= 0;
     }
     return false;
   }
 
-  addToFavorites(title: string): void {
-    if (this.isFavoriteMovie(title)) {
+  addToFavorites(movieID: string): void {
+    if (this.isFavoriteMovie(movieID)) {
       // Movie is already a favorite, so remove it
-      this.removeFavoriteMovie(title);
+      this.removeFavoriteMovie(movieID);
     } else {
       // Movie is not a favorite, so add it
-      this.fetchApiData.addFavoriteMovies(title).subscribe(() => {
+      this.fetchApiData.addFavoriteMovies(movieID).subscribe(() => {
         this.snackBar.open('Movie added to favorites', 'OK', {
           duration: 2000,
         });
@@ -89,8 +89,8 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
-  removeFavoriteMovie(title: string): void {
-    this.fetchApiData.deleteFavoriteMovie(title).subscribe(() => {
+  removeFavoriteMovie(movieID: string): void {
+    this.fetchApiData.deleteFavoriteMovie(movieID).subscribe(() => {
       this.snackBar.open('removed from favorites', 'OK', {
         duration: 2000
       })
