@@ -18,7 +18,6 @@ export class FetchApiDataService {
 
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http.post(apiUrl + 'users', userDetails).pipe(
       catchError(this.handleError));
   }
@@ -26,7 +25,6 @@ export class FetchApiDataService {
 
   // Making the api call for the user login endpoint
   public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
     return this.http.post(apiUrl + 'login', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -34,9 +32,7 @@ export class FetchApiDataService {
 
   // Making the API call to get all movies
   getAllMovies(): Observable<any> {
-    console.log('getallmovies');
     const token = localStorage.getItem('token');
-    console.log('Token:', token);
     return this.http.get(apiUrl + 'movies', {
       headers: new HttpHeaders(
         {
@@ -51,7 +47,6 @@ export class FetchApiDataService {
 
   // Making the API call to get ONE movie
   getOneMovie(title: string): Observable<any> {
-    console.log(title);
     const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/' + title, {
       headers: new HttpHeaders(
@@ -71,7 +66,6 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     const requestUrl = apiUrl + 'directors/' + director;
-    console.log('Request URL:', requestUrl);
 
     return this.http.get(requestUrl, {
       headers: new HttpHeaders({
@@ -92,7 +86,6 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     const requestUrl = apiUrl + 'genres/' + genre;
-    console.log('Request URL:', requestUrl);
 
     return this.http.get(requestUrl, {
       headers: new HttpHeaders({
@@ -165,7 +158,6 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
 
     const index = user.FavoriteMovies.indexOf(movieID);
-    console.log(index);
     if (index > -1) {
       user.FavoriteMovies.splice(index, 1);
     }
